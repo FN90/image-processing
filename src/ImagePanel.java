@@ -9,62 +9,62 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /*
- * Classe qui définit un panneau pour afficher une image dans une fenetre, elle implémente la classe JPanel 
+ * A class that defines a panel to display an image in a window, it implements the JPanel class
  */
 public class ImagePanel extends JPanel{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 		BufferedImage myImage = null;
-		// Constructeur par défaut, ne contient aucun paramtere
+		// Constructor by default, contains no parameters
 		public ImagePanel() {
 			super();
-			setBackground(Color.gray); // config du coleur de l'arrière plan
+			setBackground(Color.gray); // Background color config
 		}
-		// 2éme constructeur, il prend comme paramètre une BufferedImage
+		// 2nd constructor, it takes as parameter a BufferedImage
 		public ImagePanel(BufferedImage myImage) {
 			super();
-			this.myImage=myImage; // Affectation de l'attribut "myImage" par la variable passée en paramètre du constructeur	
+			this.myImage=myImage; //Assign the attribute "myImage" by the variable passed as parameter
 		}
-		// 3éme constructeur, il prend comme paramètre un fichier image
+		// 3rd constructor, it takes as parameter an image file
 		public ImagePanel(File imageFile) {
 			super();
 			try{
-				this.myImage=ImageIO.read(imageFile); // lecture du fichier image en utilisant la méthode "read" de la classe "ImageIO"
+				this.myImage=ImageIO.read(imageFile); // Reading the image file using the "read" method of the "ImageIO" class
 			}catch (IOException e) {
-				// En cas d'erreur de chargement du fichier image
+				// If image file loading error occurs
 				System.err.println("Erreur de lecture du fichier image");
 				e.printStackTrace();
-			}	
+			}
 		}
-		// méthode spécialisée qui dessine une image dans un JPanel, elle prend comme paramètre un objet "Graphics", il nous permet de dessiner sur un objet JPanel
+		// A specialized method that draws an image in a JPanel, it takes as parameter "Graphics" object, it allows us to draw on a JPanel object
 		protected void paintComponent(Graphics g)
 		{
 			super.paintComponent(g);
-			if(myImage != null){							
-				g.drawImage(myImage, 0, 0, null); // dessiner une image "myImage" dans la position (0,0)	
-				this.setSize(new Dimension(myImage.getWidth(),myImage.getHeight())); // configuration de la taille du panneau de l'image pour qu'il couvre la totalité de l'image on a utilisé les deux méthode getWidth(), getHeight().
-			}			
+			if(myImage != null){
+				g.drawImage(myImage, 0, 0, null); // Draw an image into "myImage" in position (0,0)
+				this.setSize(new Dimension(myImage.getWidth(),myImage.getHeight())); // setting up the size of the panel to cover the entire image we have used the two getWidth (), getHeight () methods.
+			}
 		}
 		/*
-		 *  Méthode qui ajoute une image au panneau d'image, il prend comme parametre le fichier image:
-		 *  -- lit une image a partir du fichier fileImage
-		 *  -- configure les dimension du panneau pour couvre l'image
-		 *  -- affiche un message d'errer en cas d'echec de lecture de l'image
+		 *  A method that adds an image to the image panel, it takes as a parameter the image file:
+		* - reads an image from the file fileImage
+		* - configures the size of the panel to cover the image
+		* - displays a message to err in case of failure to read the image
 		 */
 		protected void addImage(File fileImage)
-		{   // desiner une image à l'ecran	
+		{   // draw an image to the screen
 			try {
-				myImage = ImageIO.read(fileImage);	// lecture d'image a partir du fichier image			
-				this.setPreferredSize(new Dimension(myImage.getWidth(),myImage.getHeight())); // configuration de la taille du panneau image				
+				myImage = ImageIO.read(fileImage);	// lecture d'image a partir du fichier image
+				this.setPreferredSize(new Dimension(myImage.getWidth(),myImage.getHeight())); // configuration de la taille du panneau image
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			repaint();	// appel a la méthode //On redessine notre Panneau		
+			repaint();	// repaint the image into the panel
 		}
-		
+
 	}
 
 
